@@ -1,13 +1,23 @@
 name: C/C++ CI
-
+# 触发规则详解 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#on
 on: 
   push:
+    paths:
+      - 'QtScrcpy/**'
+      - '!QtScrcpy/res/**'
+      - '.github/workflows/windows.yml'
+  pull_request:
+    paths:
+      - 'QtScrcpy/**'
+      - '!QtScrcpy/res/**'
+      - '.github/workflows/windows.yml'
 jobs:
   build:
     name: Build
     # windows-latest目前是windows server 2019,选择2016是2016安装的是vs2017
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: windows-latest
+    runs-on: windows-2016
+
     # 矩阵配置 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix
     strategy:
       matrix:
